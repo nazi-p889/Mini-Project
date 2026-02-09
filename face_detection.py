@@ -31,3 +31,25 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
+Emotion detection
+
+from deepface import DeepFace
+import cv2
+from google.colab import files
+
+# Upload image
+uploaded = files.upload()
+img_path = list(uploaded.keys())[0]
+
+# Read image
+img = cv2.imread(img_path)
+
+# Analyze emotion
+result = DeepFace.analyze(
+    img,
+    actions=['emotion'],
+    enforce_detection=False
+)
+
+print("Dominant Emotion:", result[0]['dominant_emotion'])
